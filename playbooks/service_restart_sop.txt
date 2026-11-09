@@ -1,0 +1,13 @@
+SOP Reference: INFRA-SVC-404
+Target OS: Linux / Windows Server
+Component: Application Daemon Services
+Threshold Trigger: Daemon failure alert / Unresponsive state
+
+Diagnostic Workflow:
+1. Check the active state of the specific process: systemctl status application_name
+2. Inspect the last 50 lines of system logs to track critical failures: journalctl -n 50 -u application_name
+
+Remediation Procedures:
+1. Execute a graceful service restart loop: systemctl restart application_name
+2. If the process hangs or becomes a zombie process, forcefully terminate it: kill -9 $(pgrep -f application_name)
+3. Confirm operational stability by checking system status indicators again.

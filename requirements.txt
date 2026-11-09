@@ -1,0 +1,8 @@
+google-genai
+langchain-community
+langchain-core
+langchain-text-splitters
+faiss-cpu
+streamlit
+python-dotenv
+pydantic

@@ -1,0 +1,14 @@
+SOP Reference: INFRA-DISK-099
+Target OS: Linux / Ubuntu
+Component: Storage / Root Filesystem
+Threshold Trigger: Disk utilization exceeds 85%
+
+Diagnostic Workflow:
+1. Connect to the affected host terminal.
+2. Execute 'df -h' to identify the saturated filesystem mount points.
+3. Run 'du -sh /var/log/*' to look for out-of-control log files.
+
+Remediation Procedures:
+1. Purge old system log archives: find /var/log -type f -name "*.gz" -delete
+2. Clean package manager caches to free up volume blocks: apt-get clean || yum clean all
+3. Safely truncate active large text log buffers without knocking services offline: truncate -s 0 /var/log/syslog
